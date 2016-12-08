@@ -37,6 +37,8 @@
              <!--Заголовок таблицы--> 
             <thead>
             <th>Заголовок</th>
+            <th>Дата создания</th>
+            <th>Дата изменения</th>
             <th>Действие</th>
             <th></th>
             </thead>
@@ -46,10 +48,15 @@
                 @foreach ($news as $items)
                 <tr>
                      <!--Имя задачи--> 
-                    <td class="table-text col-sm-10">
+                    <td class="table-text col-sm-4">
                         <div>{{ $items->items }}</div>
                     </td>
-
+                    <td class="table-text col-sm-3">
+                        <div>{{ $items->created_at }}</div>
+                    </td>
+                    <td class="table-text col-sm-3">
+                        <div>{{ $items->updated_at }}</div>
+                    </td>
                     <td>
                           <!--Кнопка Удалить--> 
                         <form action="/admin/{{ $items->id }}" method="POST">
