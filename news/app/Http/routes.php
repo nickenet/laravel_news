@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
  * LastNews вывод списка новостей
  */
 Route::get('/', function () {
-    return view('news');
+    $news = News::orderBy('updated_at', 'asc')->get();
+    
+  return view('news', [
+    'news' => $news
+  ]);
 });
 
 /**
@@ -25,8 +29,11 @@ Route::get('/admin', function(){
 /*
  * show_concret news - показать конкретную новость
  */
-Route::post('/news/{id}', function($id){
-    
+Route::get('/news/{id}', function($id){
+    $item=News::where('id','=',$id)->first();
+    return view('item',[
+        'item' => $item
+    ]);
 });
 
 /**
