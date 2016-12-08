@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
  * LastNews вывод списка новостей
  */
 Route::get('/', function () {
-    return view('welcome');
+    return view('news');
 });
 
 /**
