@@ -57,7 +57,30 @@ Route::post('/admin', function (Request $request) {
 
     return redirect('/admin');
 });
+Route::post('/admin/{id}',function($id){
+    $item=News::where('id','=',$id)->first();
+    return view('editnews',[
+        'item' => $item
+    ]);
+});
+Route::post('/savenews/{id}',function(Request $request,$id){
+    $validator = Validator::make($request->all(), [
+                'items' => 'required|max:255',
+                'description' =>'required',
+    ]);
 
+    if ($validator->fails()) {
+        return redirect('/admin')
+                        ->withInput()
+                        ->withErrors($validator);
+    }
+    $news = News::find($id);
+    $news->items = $request->items;
+    $news->description = $request->description;
+    $news->save();
+
+    return redirect('/admin');
+});
 /**
  * Удалить существующую новость
  */
