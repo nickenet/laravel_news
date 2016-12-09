@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
  * LastNews вывод списка новостей
  */
 Route::get('/', function () {
-    $news = News::orderBy('updated_at', 'asc')->get();
+    $news = News::orderBy('updated_at', 'desc')->get();
     
   return view('news', [
     'news' => $news
